@@ -1,30 +1,26 @@
 function analyze(json) {
 
-
-    // document.getElementById("rawJSON").innerHTML = json.meals[0].mealId[5];
     images = [];
     mealName = [];
     mealId = [];
     for (let key in json) {
         let value = json[key];
-        if(value == null){
+        if (value == null) {
             let final = "No meals found";
             $(".notFound").append(final);
-        }else{
-        for (i = 0; i < value.length; i++) {
-            images.push(value[i].strMealThumb);
-            mealName.push(value[i].strMeal);
-            mealId.push(value[i].idMeal);
-        }
-    }
-    }
+        } else {
+            for (i = 0; i < value.length; i++) {
+                images.push(value[i].strMealThumb);
+                mealName.push(value[i].strMeal);
+                mealId.push(value[i].idMeal);
+            } // for
+        } // else
+    } // for
 
 
     for (let i = 0; i < images.length; i++) {
         displayFoodImage(images[i], mealName[i], mealId[i]);
-    }
-
-
+    } // for
 
 } // analyze
 
@@ -36,22 +32,18 @@ function displayFoodImage(foodImage, mealName, mealId) {
     let code = "<img src='" + foodImage + "' class='foodImages' onclick='foodPage(" + mealId + ")'>";
     let code2 = "<p>" + mealName + "</p>";
     let code3 = "</div";
-   
+
     let final = code1 + code + code2 + code3;
     $(".container55").append(final);
 }
 
 function foodPage(mealId) {
-  
+
     window.location.href = "foodPage.html?param=" + mealId;
-
-
 
 } // foodPage
 
 function designFoodPage() {
-
-
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
@@ -59,10 +51,9 @@ function designFoodPage() {
     let fullURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + page_type;
 
     $.get(fullURL, function(data) {
-        
+
         createFoodPage(data);
     });
-
 
 } // designFoodPage
 
@@ -124,9 +115,6 @@ function createFoodPage(data) {
         measurement.push(value[0].strMeasure19);
         measurement.push(value[0].strMeasure20);
 
-
-
-
     } // for
 
     document.getElementById("food-title").innerHTML = mealName[0];
@@ -135,13 +123,13 @@ function createFoodPage(data) {
 
     let videoLink = video[0].replace('watch?v=', 'embed/')
     videoLink = '<iframe width="400" height="400" class="food-image2" src="' + videoLink + ' "></iframe>';
-    
+
     $("#food-image").append(videoLink);
 
     let tab = "<table class='ingre-table2'>";
     let header = "<tr class='ingre-table2'><th class='ingre-table2'>Ingredients</th> <th class='ingre-table2'>Measurements</th></tr>";
     let content = "";
-    
+
     for (let i = 0; i < ingredients.length; i++) {
         if (ingredients[i] != "") {
             content += "<tr class='ingre-table2'><td class='ingre-table2'>" + ingredients[i] + "</td><td class='ingre-table2'>" + measurement[i] + "</td></tr>";
@@ -153,14 +141,13 @@ function createFoodPage(data) {
     let tabEnd = "</table>";
 
     let finalOutput = tab + header + content + tabEnd;
-    
+
     document.getElementById("ingre-table").innerHTML = finalOutput;
     let total = instructions[0];
     let result = total.replace(/\n/g, '</br>');
 
     result = '<p id="instr"><span id="instr-title">Instructions<br><br></span>' + result + '</p>';
     document.getElementById("instruction").innerHTML = result;
-    // $("#instruction").append(result);
 
 } // createFoodPage
 
@@ -168,32 +155,15 @@ function createFoodPage(data) {
 function getJSON(searchItem) {
 
     let baseURL = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
-    
+
     // get information entered to web-page here
-    //let searchItem = document.getElementById("foodItem").value;
-    // using baseURL + information entered, create full URL
     let fullURL;
-    if(searchItem == ""){
+    if (searchItem == "") {
         fullURL = baseURL + ".";
-    }else{
-     fullURL = baseURL + searchItem;
-    }
-
-
-    // Make sure the fullURL works: copy and paste it in a browser:
-   // console.log(fullURL);
-
+    } else {
+        fullURL = baseURL + searchItem;
+    } // if else 
     $.get(fullURL, function(data) {
-        // The following line outputs the JSON response to the console:
-        
-
-        // The following line outputs the JSON response to the webpage:
-
-        //$("#rawJSON").html(JSON.stringify(data));
-
-        // The following line gives the JSON response to the analyze
-        // function. From there, you can pull information from the JSON
-        // response and display things on your webpage.
 
         analyze(data);
     });
@@ -215,12 +185,9 @@ function getUrlData() {
 } // getURLData
 
 
-
-
 $("#nav-btn").click(function() {
     $("nav").toggle("slow");
 });
-
 
 
 window.onresize = function() {
@@ -231,9 +198,9 @@ window.onresize = function() {
         cond = 0;
         location.reload();
         return;
-    }
+    } // if
 
-}
+} // resize
 
 function myFunction() {
     var x = document.getElementById("myTopnav");
@@ -241,27 +208,14 @@ function myFunction() {
         x.className += " responsive";
     } else {
         x.className = "topnav";
-    }
-}
+    } // if else if
+} // myFunction
 
 function openModal() {
-  document.getElementById("myModal").style.display = "block";
+    document.getElementById("myModal").style.display = "block";
 
-   
-}
+} // openModal
 
 function closeModal() {
-  document.getElementById("myModal").style.display = "none";
-}
-
-
-
-
-
-
-
-
-
-
-
-
+    document.getElementById("myModal").style.display = "none";
+} // closeModal
