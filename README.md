@@ -10,4 +10,4 @@ This is a project where a responsive website was created using a REST API based 
 <img width="1041" alt="FoodSearch" src="https://user-images.githubusercontent.com/58525723/208777946-3203ce05-1802-471d-83be-991e4a880757.png">
 
  # Credits
-
+RESTful API from: https://www.themealdb.com/
