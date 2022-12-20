@@ -2,7 +2,7 @@
 This is a project where a responsive website was created using a REST API based on popular meals.  
 
 # Description
-
+A website created using HTML, CSS, Javascript, and some jQuery. The user can type any meal of their interest in the search box, press enter, and get a list of all meals that contain the entered string. The user can click on any one of these meals, which directs them to a new page containing more information regarding the dish.
 
 # Screenshots
 
